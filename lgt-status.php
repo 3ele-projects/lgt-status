@@ -80,7 +80,7 @@ add_action('edit_user_profile', 'module_user_profile_fields');
 function module_user_profile_fields($user)
 {
     if (in_array('aussteller', $user->roles)) :
-        global $current_user;
+        global $user_id;
 ?>
         <h3><?php _e('Status Meldung'); ?></h3>
 
@@ -88,9 +88,7 @@ function module_user_profile_fields($user)
             <tr>
                 <th><label for="lgt_status">Aktueller Status</label></th>
                 <td>
-                    <textarea id="lgt_status" name="lgt_status" rows="4" cols="50" maxlength="400"><?php echo sanitize_textarea_field(nl2br(get_the_author_meta('lgt_status', $current_user->ID))); ?></textarea>
-                    <?php echo get_the_author_meta('lgt_status', $current_user->ID); ?>
-
+                    <textarea id="lgt_status" name="lgt_status" rows="4" cols="50" maxlength="400"><?php echo sanitize_textarea_field(nl2br(get_the_author_meta('lgt_status', $user_id))); ?></textarea>
                 </td>
             </tr>
         </table>
