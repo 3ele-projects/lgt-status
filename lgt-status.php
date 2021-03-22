@@ -147,8 +147,11 @@ function lgt_form_frontend_form($user_id)
         }
     }
     if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action']) && $_POST['action'] == 'logged_out') {
+        $nonce = $_POST['_wpnonce'];
         if (!empty($_POST['logged_out'])) {
-
+            if (!wp_verify_nonce($nonce, 'logged_out')) {
+                exit; // Get out of here, the nonce is rotten!
+            }
             wp_logout();
             wp_redirect(get_the_permalink());
         }
