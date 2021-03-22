@@ -101,7 +101,7 @@ function lgt_form_frontend_form($user_id)
 
     <form method="POST" id="logout" action="<?php the_permalink(); ?>">
         <?php
-        echo '<h2>Hallo ' . get_the_author_meta('user_email', $user_id);
+        echo '<h2>Hallo ' . get_the_author_meta('nickname', $user_id);
         ?>
         <input name="logged_out" type="submit" id="logged_out" class="submit button" style="margin-left:30px; font-size:10px" value="<?php _e('Log out', 'profile'); ?>" />
         </h2>
@@ -148,9 +148,7 @@ function lgt_form_frontend_form($user_id)
     }
     if ('POST' == $_SERVER['REQUEST_METHOD'] && !empty($_POST['action']) && $_POST['action'] == 'logged_out') {
         if (!empty($_POST['logged_out'])) {
-            if (!wp_verify_nonce($nonce, 'logged_out')) {
-                exit; // Get out of here, the nonce is rotten!
-            }
+
             wp_logout();
             wp_redirect(get_the_permalink());
         }
